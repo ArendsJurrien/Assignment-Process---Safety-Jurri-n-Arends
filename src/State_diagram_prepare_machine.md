@@ -25,6 +25,7 @@ FILL_WATER -> CHECK_PAD [label="Water is filled"]
 CHECK_PAD -> PLACE_PAD [label="No pad placed"]
 PLACE_PAD -> TASK_PREPARED [label="Pad is placed"]
 CHECK_PAD -> TASK_PREPARED [label="Water is filled, pad is placed"]
+TASK_PREPARED -> STANDBY
 
 }
 @enddot

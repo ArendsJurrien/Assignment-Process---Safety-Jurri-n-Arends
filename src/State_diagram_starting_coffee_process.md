@@ -11,22 +11,18 @@ graph [bgcolor="white"]
 rankdir="LR";
 node[shape="circle"]
 
-OFF 
-CLEANING_MODE [label="CLEANING\nMODE"]
-ERROR
 STANDBY
 HEATING_WATER [label="HEATING\nWATER"]
-RUNNING
- 
-OFF -> STANDBY [label="turn on"]
-STANDBY -> OFF [label="turn off"]
-STANDBY -> HEATING_WATER [label="Choose amount of cups"]
-HEATING_WATER -> RUNNING [label="Water is heated"]
-RUNNING -> STANDBY [label="Coffee has been made"]
-STANDBY -> ERROR [label="Water shortage"]
-ERROR -> STANDBY [label="Water added"]
-STANDBY -> CLEANING_MODE [label="Descaling"]
-CLEANING_MODE -> STANDBY [label="Descaled"]
+CHOOSE_AMOUNT_OF_CUPS [label="CHOOSE\nAMOUNT\nOF\nCUPS"]
+WAIT
+COFFEE_FINISHED [label="COFFEE\nFINISHED"]
+
+STANDBY -> CHOOSE_AMOUNT_OF_CUPS [label="Enough water and pad is placed"]
+CHOOSE_AMOUNT_OF_CUPS -> HEATING_WATER [label="Amount of cups is choosen"]
+HEATING_WATER -> WAIT [label="Water is heated"]
+WAIT-> COFFEE_FINISHED [label="Coffee is brewed"]
+COFFEE_FINISHED -> STANDBY
+
 
 }
 @enddot
