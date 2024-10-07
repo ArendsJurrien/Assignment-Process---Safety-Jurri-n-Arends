@@ -1,5 +1,10 @@
 # Summary
 
-- [State diagram](./State_diagram.md)
-- [Sequence diagram communication](./Sequance_diagram_communication.md)
-- [Sequence diagram calling](./Sequance_diagram_calling.md)
+- [State diagrams](./State_diagrams.md)
+    - [State diagram preparing machine](./State_diagram_prepare_machine.md)
+    - [State diagram starting coffee process](./State_diagram_starting_coffee_process.md)
+    - [State diagram descaling machine](./State_diagram_descaling_machine.md)
+- [Sequence diagram communication](./Sequence_diagram_communication.md)
+- [Sequence diagram calling](./Sequence_diagram_calling.md)
+- [Procesomschrijving](./Procesomschrijving.md)
+

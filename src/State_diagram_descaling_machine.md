@@ -1,4 +1,6 @@
-# State diagram espresso machine
+# State diagram descaling machine
+
+The following state diagram describes the states of the task preparing the
 
 ```plantuml
 @startdot
@@ -26,7 +28,5 @@ ERROR -> STANDBY [label="Water added"]
 STANDBY -> CLEANING_MODE [label="Descaling"]
 CLEANING_MODE -> STANDBY [label="Descaled"]
 
-
 }
 @enddot
-```
