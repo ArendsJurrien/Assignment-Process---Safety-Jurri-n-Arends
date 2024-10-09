@@ -1,6 +1,5 @@
-# State diagram starting coffee process
-
-The following state diagram describes the states of the task starting the coffee process
+# State diagram brew coffee
+The following state diagram describes the states of the task brewing coffee
 
 ```plantuml
 @startdot

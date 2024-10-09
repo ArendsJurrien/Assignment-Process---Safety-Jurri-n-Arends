@@ -1,34 +1,25 @@
 # Sequence diagram communication
 The following sequence diagram shows the communicating between the tasks
+- GVL = Controller 
 
 ```plantuml
 @startuml
-participant User
 
-User -> Controller: Start up 
+
+Prepare_Machine -> Controller: Waterlevel
+Activate Prepare_Machine #BLUE 
 activate Controller #RED
-Controller -> Standby: Start up
-activate Standby #BLUE
-Standby --> Controller: Started up
-Controller --> User: Led goes on
+Prepare_Machine -> Controller: Pad inserted
+Deactivate Prepare_Machine 
 
 
-User -> Controller: Amount of cups
-deactivate Standby
-Controller -> Waterreservoir: <Request x amount of water>
-Waterreservoir --> Controller: oke
-
-Controller -> Boiler: Heat up x amount of water
-activate Boiler #BLUE
-Controller --> User: Led starts blinking 
-Boiler --> Controller: X amount of water heated
-deactivate Boiler
-Controller -> Pump: Start pumping
-activate Pump #BLUE
-Pump --> Controller: Done
-deactivate Pump
-
-Controller --> User: Led stops blinking
+Brew_Coffee -> Controller: Read waterlevel
+Activate Brew_Coffee #Green 
+Brew_Coffee -> Controller: Read pad inserted
+Controller -> Brew_Coffee: TRUE
+Brew_Coffee -> Controller: Start brewing
+Deactivate Controller
+Deactivate Brew_Coffee
 
 @enduml
 ```

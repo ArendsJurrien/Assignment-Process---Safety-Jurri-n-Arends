@@ -1,6 +1,6 @@
 # State diagram descaling machine
 
-The following state diagram describes the states of the task preparing the
+The following state diagram describes the states of the task
 
 ```plantuml
 @startdot
