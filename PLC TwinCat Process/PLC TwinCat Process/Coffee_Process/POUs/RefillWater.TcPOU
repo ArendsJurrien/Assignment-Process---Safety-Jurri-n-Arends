@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="RefillWater" Id="{60a29a19-bfa5-4e8c-84ec-0c6eff5f24c7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION RefillWater : BOOL
+VAR_INPUT
+	WaterRefilled		:		BOOL;		// Water is refilled
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Refill water of coffee machine
+IF WaterRefilled = TRUE THEN
+  	GVL.WaterLevel := 2;
+  	WaterRefilled:= FALSE;
+END_IF;]]></ST>
+    </Implementation>
+    <LineIds Name="RefillWater">
+      <LineId Id="8" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="CoffeeMachine" Id="{e84f3ed1-3700-48b7-a6a2-0026f6ea9e48}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE CoffeeMachine :
+(
+	OFF,
+	Standby,
+	Waterfilled,
+	PodPlaced,
+	Ready
+) := OFF;
+END_TYPE
+
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{aaabf5b7-2608-4ca5-858b-3fab16923e9d}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	Power				:		BOOL; // Turning On/Off the coffee machine
+	StartBrewing		:		BOOL; //Preparing of machine is finished
+	CoffeeBrewed		:		BOOL; // The coffee is brewed/finished
+	WaterLevel			:		INT:= 4;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

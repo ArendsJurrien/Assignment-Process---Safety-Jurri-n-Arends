@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="PrepareMachine" Id="{248cfbe4-19da-4af2-bdf1-7508e9f08e1a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PrepareMachine
+VAR
+	LED					: 		BOOL;		// LED which indicates the machine is on/off or not enough water
+	Pod					: 		BOOL;		// Pod(s) placed
+	BlinkInterval		:		BLINK;		// Interval time for indicating there is not enough water
+	CupsChoosen			:		BOOL;		// Amount of cups is choosen (1 or 2 cups)
+	WaterRefilled		: 		BOOL;		// dddd
+	
+	// STATES
+	OFF 				: 		BOOL;		// Coffee machine is off
+	Standby 			:		BOOL;		// Coffee machine in standy mode
+  	WaterFilled 		: 		BOOL;		// Water in machine needs to be filled
+   	PodPlaced 			: 		BOOL;		// Pad(s) needs to be placed
+	Ready				:		BOOL;		// Preparation is ready
+	State : CoffeeMachine := CoffeeMachine.OFF; // Current state
+	
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Producing coffee by means of an senseo machine
+// Name: Jurriën Arends
+// Studentnumer: 515355
+// Date: 22-10-2024
+// Version: 0.7
+
+// The PLC program must contain:
+// - 2 tasks running independently
+// - 1 function called by at least one task 
+// - a GVL from which the 2 tasks read and write variables
+
+
+// Task 1: Preparing machine // DOWNLOAD LIBRARY BLINK
+CASE State OF	
+// STATE OFF
+CoffeeMachine.OFF:
+    IF GVL.Power = FALSE THEN
+	  OFF:= TRUE;
+	  Standby:= FALSE;
+	  LED:= FALSE;
+    END_IF
+	
+    IF GVL.Power = TRUE  THEN
+	  State:= CoffeeMachine.Standby;
+	  OFF:= FALSE;
+    END_IF
+	
+	//IF WaterRefilled = TRUE THEN
+	//	WaterLevel := 4;
+	//	WaterRefilled:= FALSE;
+	//END_IF
+  
+ // STATE Standby 
+ CoffeeMachine.Standby:
+  	IF GVL.Power = TRUE THEN
+   	 Standby:= TRUE;
+	 LED:= TRUE;
+  	END_IF
+
+	IF GVL.Power = FALSE  THEN
+	  State:= CoffeeMachine.OFF;
+	  Standby:= FALSE;
+	  LED:= FALSE;
+ 	END_IF
+	 
+	IF GVL.WaterLevel <= 0  THEN
+		BlinkInterval(ENABLE:= GVL.WaterLevel <=0, TIMELOW:= T#0.5S, TIMEHIGH:= T#0.5S, OUT=> LED);
+		RefillWater(WaterRefilled);
+		Waterrefilled:= FALSE;
+		ELSIF GVL.WaterLevel > 0 THEN
+		State:= CoffeeMachine.WaterFilled;
+	 	Standby:= FALSE;
+	  	LED:= FALSE;
+	END_IF
+	
+	//IF WaterRefilled = TRUE THEN
+	//	WaterLevel := 4;
+	//	WaterRefilled:= FALSE;
+	//END_IF
+	
+ // State WaterFilled 	
+  CoffeeMachine.WaterFilled:
+    IF GVL.WaterLevel > 0 THEN
+      WaterFilled:= TRUE;
+	  LED:= TRUE;
+  	END_IF
+	
+ 	IF Pod = TRUE THEN
+	  State:= CoffeeMachine.PodPlaced;
+	  WaterFilled:= FALSE;
+	  LED:= FALSE;
+  	END_IF
+	
+	IF GVL.Power = FALSE  THEN
+	  State:= CoffeeMachine.OFF;
+	  WaterFilled:= FALSE;
+	  LED:= FALSE;
+ 	END_IF
+	
+	//IF WaterRefilled = TRUE THEN
+	//	WaterLevel := 4;
+	//	WaterRefilled:= FALSE;
+	//END_IF
+	 
+	 	 
+// State PodPlaced	
+   CoffeeMachine.PodPlaced:
+    IF Pod = TRUE THEN
+      Podplaced:= TRUE;
+	  LED:= TRUE;
+ 	END_IF
+	
+	IF CupsChoosen = TRUE THEN
+	  State:= CoffeeMachine.Ready;
+	  PodPlaced:= FALSE;
+	  LED:= TRUE;
+	END_IF
+	
+	 IF GVL.Power = FALSE  THEN
+	  State:= CoffeeMachine.OFF;
+	  PodPlaced:= FALSE;
+	  LED:= FALSE;
+ 	 END_IF
+	 
+	 //IF WaterRefilled = TRUE THEN
+	//	WaterLevel := 4;
+	//	WaterRefilled:= FALSE;
+	//END_IF
+	 
+// State Task ready	
+   CoffeeMachine.Ready:
+    IF CupsChoosen = TRUE THEN
+      Ready:= TRUE;
+	  LED:= TRUE;
+	  GVL.StartBrewing:= TRUE;
+	  Pod:= FALSE;
+	  CupsChoosen:= FALSE;
+ 	END_IF
+	
+	 IF GVL.Power = FALSE  THEN
+	  State:= CoffeeMachine.OFF;
+	  Ready:= FALSE;
+	  LED:= FALSE;
+ 	 END_IF
+	 
+	 IF GVL.CoffeeBrewed = TRUE THEN
+		State:= CoffeeMachine.Standby;
+		Ready:= FALSE;
+		LED:= FALSE;
+		GVL.WaterLevel := GVL.WaterLevel - 1;
+		GVL.CoffeeBrewed:= FALSE;
+	 END_IF
+	 
+	 IF Pod = TRUE THEN
+      Pod:= FALSE;
+	  LED:= TRUE;
+ 	END_IF
+	 
+	 //IF WaterRefilled = TRUE THEN
+	//	WaterLevel := 4;
+	//	WaterRefilled:= FALSE;
+	//END_IF
+ELSE
+  OFF 			:= TRUE;
+  Standby 		:= FALSE;
+  WaterFilled 	:= FALSE;
+  PodPlaced		:= FALSE;
+  Ready			:= FALSE;
+END_CASE; ]]></ST>
+    </Implementation>
+    <LineIds Name="PrepareMachine">
+      <LineId Id="22" Count="14" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="38" Count="9" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="185" Count="2" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="48" Count="15" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="230" Count="0" />
+      <LineId Id="64" Count="4" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="164" Count="1" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="70" Count="17" />
+      <LineId Id="168" Count="0" />
+      <LineId Id="170" Count="2" />
+      <LineId Id="169" Count="0" />
+      <LineId Id="88" Count="19" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="175" Count="2" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="108" Count="6" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="115" Count="6" />
+      <LineId Id="128" Count="2" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="233" Count="2" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="179" Count="2" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="122" Count="5" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
