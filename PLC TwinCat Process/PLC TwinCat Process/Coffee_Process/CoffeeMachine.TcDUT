@@ -3,7 +3,7 @@
   <DUT Name="CoffeeMachine" Id="{e84f3ed1-3700-48b7-a6a2-0026f6ea9e48}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE CoffeeMachine :
+TYPE CoffeeMachine :		// enumaration of all states for 'PrepareMachine'.
 (
 	OFF,
 	Standby,

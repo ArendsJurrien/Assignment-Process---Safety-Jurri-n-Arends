@@ -3,10 +3,10 @@
   <GVL Name="GVL" Id="{aaabf5b7-2608-4ca5-858b-3fab16923e9d}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	Power				:		BOOL; // Turning On/Off the coffee machine
-	StartBrewing		:		BOOL; //Preparing of machine is finished
-	CoffeeBrewed		:		BOOL; // The coffee is brewed/finished
-	WaterLevel			:		INT:= 4;
+	Power				:		BOOL; 		// Turning On/Off the coffee machine
+	StartBrewing		:		BOOL; 		// Preparing of machine is finished
+	CoffeeBrewed		:		BOOL; 		// The coffee is brewed/finished
+	WaterLevel			:		INT:= 4;	// Waterlevel of a full reservoir 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -3,7 +3,7 @@
   <DUT Name="Brewing" Id="{b25391a5-7890-4228-a169-ad2244204845}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 {attribute 'strict'}
-TYPE Brewing :
+TYPE Brewing :	// enumaration of all states for 'BrewCoffee'.
 (
 	OFF,
 	Idle,

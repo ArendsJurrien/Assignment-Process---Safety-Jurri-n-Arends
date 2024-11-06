@@ -6,8 +6,23 @@
         <o xml:space="preserve" t="GlobalTextListObject">
           <l n="TextList" t="ArrayList" cet="TextListRow">
             <o>
+              <v n="TextID">"358"</v>
+              <v n="TextDefault">"%i"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"743"</v>
+              <v n="TextDefault">"%i °C"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"16"</v>
               <v n="TextDefault">"/ WATERLEVEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"844"</v>
+              <v n="TextDefault">"AVAILABLE"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -48,6 +63,16 @@
             <o>
               <v n="TextID">"601"</v>
               <v n="TextDefault">"Cups choosen"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"104"</v>
+              <v n="TextDefault">"Enough"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"986"</v>
+              <v n="TextDefault">"ENOUGH"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
@@ -208,6 +233,11 @@
             <o>
               <v n="TextID">"456"</v>
               <v n="TextDefault">"WATERLEVEL"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"229"</v>
+              <v n="TextDefault">"Waterlevel: %i"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
           </l>

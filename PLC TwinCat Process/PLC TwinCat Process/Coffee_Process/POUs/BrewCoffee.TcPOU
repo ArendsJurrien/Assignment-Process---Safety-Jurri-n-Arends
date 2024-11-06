@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="BrewCoffee" Id="{92579e20-cd9a-4b8a-a300-5b1a8846509e}" SpecialFunc="None">
-    <Declaration><![CDATA[PROGRAM BrewCoffee
+    <Declaration><![CDATA[PROGRAM BrewCoffee								
 VAR
-	WaterTemp			:		INT;
-	LED					: 		BOOL;
-	Timer				:		TON;
+	WaterTemp			:		INT;			// Water temperature 900 = 90°C
+	Timer				:		TON;			// Timer for brewing the coffee
 
 // STATES
 	OFF					:		BOOL;			// Coffee machine is off
-	Idle				:		BOOL;			// Waiting for input
+	Idle				:		BOOL;			// Waiting for input of PrepareMachine
 	HeatingWater		:		BOOL;			// Water is heating up
-   	BrewCoffee			: 		BOOL;			//
+   	BrewCoffee			: 		BOOL;			// Coffee is brewing
 	State : Brewing := Brewing.OFF; 			// Current state
 	
 END_VAR
@@ -20,88 +19,79 @@ END_VAR
       <ST><![CDATA[// Producing coffee by means of an senseo machine
 // Name: Jurriën Arends
 // Studentnumer: 515355
-// Date: 21-10-2024
-// Version: 0.6
+// Date: 6-11-2024
+// Version: 0.8
 
 // Task 2: Brewing coffee
 CASE State OF	
 // STATE OFF
-Brewing.OFF:
-     IF GVL.Power = FALSE THEN
-	  OFF:= TRUE;
-	  Idle:= FALSE;
-	  LED:= FALSE;
+ Brewing.OFF:
+	IF GVL.Power = FALSE THEN					// IF no power, stay in this state
+	  	OFF:= TRUE;
+	  	Idle:= FALSE;
     END_IF
 	  
-    IF GVL.Power = TRUE  THEN
-	  State:= Brewing.Idle;
-	  OFF:= FALSE;
+    IF GVL.Power = TRUE  THEN					// IF power, go to state Idle
+	  	State:= Brewing.Idle;
+	  	OFF:= FALSE;
     END_IF
 	
   
  // STATE Idle 
  Brewing.Idle:
-	IF GVL.Power = TRUE THEN
-   	 Idle:= TRUE;
-	 LED:= TRUE;
+	IF GVL.Power = TRUE THEN					// If power, state is Idle
+   		Idle:= TRUE;
   	END_IF
 	
-	IF GVL.StartBrewing = TRUE THEN
+	IF GVL.StartBrewing = TRUE THEN				// Read variable from task 'PrepareMachine'. If machine is prepared, go to state Heating water
 		State:= Brewing.HeatingWater;
-		WaterTemp:= 20;
+		WaterTemp:= 20;							// Water temperature is 20°C
 		Idle:= FALSE;
-		LED:= FALSE;
 	END_IF
 	
-		IF GVL.Power = FALSE THEN
+	IF GVL.Power = FALSE THEN					// If no power, go to state Off
 		state:= Brewing.OFF;
-		LED:= OFF;
 		Idle:= FALSE;
 	END_IF
 	
 
 // State HeatingWater
-Brewing.HeatingWater:
-	IF GVL.StartBrewing = TRUE THEN
-	 HeatingWater:= TRUE;
-	 WaterTemp:= WaterTemp +1;
-	 LED:= TRUE;
-	 END_IF
+ Brewing.HeatingWater:
+	IF GVL.StartBrewing = TRUE THEN				// If machine is prepared, start heating up water
+	 	HeatingWater:= TRUE;
+	 	WaterTemp:= WaterTemp +1;
+	END_IF
 	
-	IF WaterTemp = 500 THEN
+	IF WaterTemp = 900 THEN						// If watertemp = 90°C (900), go to state Brew Coffee
 		state:= Brewing.BrewCoffee;
 		HeatingWater:= FALSE;
 		GVL.StartBrewing:= FALSE;
 	END_IF
 	
-	IF GVL.Power = FALSE THEN
+	IF GVL.Power = FALSE THEN					// If no power, go to state Off
 		state:= Brewing.OFF;
-		LED:= OFF;
 		HeatingWater:= FALSE;
 	END_IF
 	
-// State BrewCoffee
-Brewing.BrewCoffee:
-	IF WaterTemp = 500 THEN
+// State BrewCoffee								
+ Brewing.BrewCoffee:							
+	IF WaterTemp = 900 THEN						// If water is heated, start brewing coffee
 		BrewCoffee:= TRUE;
-		LED:= TRUE;
 	END_IF
 	
-	Timer(IN:=TRUE, PT:=T#5S);
+	Timer(IN:=TRUE, PT:=T#5S);					// Brewing time
 	
-	IF Timer.Q = TRUE THEN
+	IF Timer.Q = TRUE THEN						// If brewing is finished, write a variable to task 'Prepare machine'. Go to state Idle
 		State:=Brewing.Idle;
 		BrewCoffee:= FALSE;
 		Timer(IN:= FALSE);
 		GVL.CoffeeBrewed:= TRUE;
 	END_IF
 	
-	IF GVL.Power = FALSE THEN
+	IF GVL.Power = FALSE THEN					// If no power, go to state Off
 		state:= Brewing.OFF;
-		LED:= OFF;
 		BrewCoffee:= FALSE;
  	END_IF
-	
 
 ELSE
 	OFF				:= TRUE;
@@ -111,33 +101,38 @@ ELSE
 END_CASE; ]]></ST>
     </Implementation>
     <LineIds Name="BrewCoffee">
-      <LineId Id="23" Count="19" />
+      <LineId Id="23" Count="12" />
+      <LineId Id="37" Count="5" />
       <LineId Id="110" Count="0" />
-      <LineId Id="43" Count="9" />
+      <LineId Id="43" Count="4" />
+      <LineId Id="49" Count="3" />
       <LineId Id="116" Count="0" />
-      <LineId Id="53" Count="2" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="55" Count="0" />
       <LineId Id="103" Count="0" />
-      <LineId Id="106" Count="3" />
+      <LineId Id="106" Count="1" />
+      <LineId Id="109" Count="0" />
       <LineId Id="105" Count="0" />
       <LineId Id="104" Count="0" />
       <LineId Id="56" Count="3" />
       <LineId Id="112" Count="0" />
-      <LineId Id="61" Count="1" />
+      <LineId Id="61" Count="0" />
       <LineId Id="90" Count="0" />
       <LineId Id="64" Count="3" />
       <LineId Id="119" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="92" Count="2" />
-      <LineId Id="96" Count="1" />
+      <LineId Id="97" Count="0" />
       <LineId Id="95" Count="0" />
-      <LineId Id="69" Count="13" />
+      <LineId Id="69" Count="4" />
+      <LineId Id="75" Count="7" />
       <LineId Id="122" Count="0" />
       <LineId Id="83" Count="0" />
       <LineId Id="98" Count="0" />
-      <LineId Id="100" Count="2" />
+      <LineId Id="100" Count="1" />
       <LineId Id="99" Count="0" />
       <LineId Id="84" Count="0" />
-      <LineId Id="137" Count="1" />
+      <LineId Id="138" Count="0" />
       <LineId Id="85" Count="4" />
       <LineId Id="2" Count="0" />
     </LineIds>

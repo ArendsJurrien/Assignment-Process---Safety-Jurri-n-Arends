@@ -5,10 +5,10 @@
     <CycleTime>10000</CycleTime>
     <Priority>20</Priority>
     <PouCall>
-      <Name>BrewCoffee</Name>
+      <Name>PrepareMachine</Name>
     </PouCall>
     <PouCall>
-      <Name>PrepareMachine</Name>
+      <Name>BrewCoffee</Name>
     </PouCall>
     <TaskFBGuid>{c46e68ab-84cf-498d-bd53-dbb56a9ea455}</TaskFBGuid>
     <Fb_init>{604fc17a-2f38-44da-bd41-f1963b5b6a95}</Fb_init>

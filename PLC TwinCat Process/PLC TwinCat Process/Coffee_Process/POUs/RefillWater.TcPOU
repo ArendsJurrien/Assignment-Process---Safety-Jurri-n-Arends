@@ -9,13 +9,21 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Refill water of coffee machine
-IF WaterRefilled = TRUE THEN
-  	GVL.WaterLevel := 2;
+      <ST><![CDATA[// Producing coffee by means of an senseo machine
+// Name: Jurriën Arends
+// Studentnumer: 515355
+// Date: 6-11-2024
+// Version: 0.8
+
+// Function: Refill water of coffee machine when it's empty.
+IF WaterRefilled = TRUE THEN				// If water is refilled. Waterlevel of reservoir is full. Return variable to 'PrepareMachine'.
+  	GVL.WaterLevel := 4;	
   	WaterRefilled:= FALSE;
 END_IF;]]></ST>
     </Implementation>
     <LineIds Name="RefillWater">
+      <LineId Id="26" Count="3" />
+      <LineId Id="24" Count="1" />
       <LineId Id="8" Count="1" />
       <LineId Id="13" Count="0" />
       <LineId Id="17" Count="0" />
