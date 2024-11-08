@@ -1,1 +1,0 @@
-# State diagram descaling machine

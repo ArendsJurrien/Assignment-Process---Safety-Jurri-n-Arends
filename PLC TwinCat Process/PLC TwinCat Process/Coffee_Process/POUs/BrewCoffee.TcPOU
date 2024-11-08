@@ -19,13 +19,13 @@ END_VAR
       <ST><![CDATA[// Name: Jurriën Arends
 // Studentnumer: 515355
 // Date: 8-11-2024
-// Version: 0.9
+// Version: 1.0
 
 // Task 2: Brewing coffee
 CASE State OF	
 // STATE OFF
  Brewing.OFF:
-	IF GVL.Power = FALSE THEN					// IF no power, stay in this state
+	IF GVL.Power = FALSE THEN					// If no power, stay in this state
 	  	OFF:= TRUE;
 	  	Idle:= FALSE;
     END_IF
@@ -36,8 +36,7 @@ CASE State OF
 
     END_IF
 	
-  
- // STATE Idle 
+// STATE Idle 
  Brewing.Idle:
 	IF GVL.Power = TRUE THEN					// If power, state is Idle
    		Idle:= TRUE;
@@ -59,7 +58,7 @@ CASE State OF
  Brewing.HeatingWater:
 	IF GVL.StartBrewing = TRUE THEN				// If machine is prepared, start heating up water
 	 	HeatingWater:= TRUE;
-	 	WaterTemp:= WaterTemp +1;
+	 	WaterTemp:= WaterTemp +1;				// Add temperature + 1
 	END_IF
 	
 	IF WaterTemp = 900 THEN						// If watertemp = 90°C (900), go to state Brew Coffee
@@ -79,7 +78,7 @@ CASE State OF
 		BrewCoffee:= TRUE;
 	END_IF
 	
-	Timer(IN:=TRUE, PT:=T#5S);					// Brewing time
+	Timer(IN:=TRUE, PT:=T#5S);					// Brewing time (5 sec)
 	
 	IF Timer.Q = TRUE THEN						// If brewing is finished, write a variable to task 'Prepare machine'. Go to state Idle
 		State:=Brewing.Idle;
@@ -103,7 +102,8 @@ END_CASE;]]></ST>
     <LineIds Name="BrewCoffee">
       <LineId Id="167" Count="16" />
       <LineId Id="265" Count="0" />
-      <LineId Id="184" Count="63" />
+      <LineId Id="184" Count="1" />
+      <LineId Id="187" Count="60" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

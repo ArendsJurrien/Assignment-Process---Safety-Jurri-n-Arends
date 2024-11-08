@@ -1,5 +1,5 @@
 # State diagram preparing machine
-The following state diagram describes the states of the task preparing of the machine
+The following state diagram describes the states of the task 'preparing machine'.
 
 ```plantuml
 @startdot
@@ -12,20 +12,17 @@ node[shape="circle"]
 
 OFF
 STANDBY
-FILL_WATER  [label="FILL\nWATER"]
-CHECK_PAD [label="CHECK\nPAD"]
-PLACE_PAD [label="PLACE\nPAD"]
-TASK_PREPARED [label="TASK\nPREPARED"]
+WATER_FILLED  [label="WATER\nFILLED"]
+POD_PLACED [label="POD\nPLACED"]
+READY [label="READY"]
 
-OFF -> STANDBY [label="Turn machine ON"]
-STANDBY -> CHECK_PAD [label="LED is ON"]   
-STANDBY -> FILL_WATER [label="LED blinks, not enough water"]
-FILL_WATER -> CHECK_PAD [label="Water is filled"]
-CHECK_PAD -> PLACE_PAD [label="No pad placed"]
-PLACE_PAD -> TASK_PREPARED [label="Pad is placed"]
-CHECK_PAD -> TASK_PREPARED [label="Water is filled, pad is placed"]
-TASK_PREPARED -> STANDBY
-STANDBY -> OFF [label="Turn machine OFF"]
+
+OFF -> STANDBY [label="Power On"] 
+STANDBY -> WATER_FILLED [label="Enough water"]
+WATER_FILLED -> POD_PLACED [label="Pod is placed"]
+POD_PLACED -> READY [label="Amount of cups choosen"]
+READY -> STANDBY [label="Preparing finished"]
+STANDBY -> OFF [label="Power Off"] 
 
 }
 @enddot

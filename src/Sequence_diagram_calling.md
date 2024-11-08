@@ -17,10 +17,12 @@ deactivate Visualization
 Prepare_Machine -> Visualization: Indicator 'LED' turns on
 
 Prepare_Machine -> GVL: Check Waterlevel
-GVL -> Prepare_Machine: Waterlevel =< 0
-Prepare_Machine -> Function_Refill_Water: Wait for refill
-activate Function_Refill_Water #YELLOW
+GVL --> Prepare_Machine: Waterlevel =< 0
 Prepare_Machine -> Visualization: Indicator 'LED' starts to blink 
+Prepare_Machine -> Function_Refill_Water: Call function refill water
+activate Function_Refill_Water #YELLOW
+Function_Refill_Water -> Function_Refill_Water: Wait for refill
+
 
 
 User -> Visualization: Push 'WaterRefilled' button
@@ -35,10 +37,8 @@ deactivate Visualization
 Function_Refill_Water -> GVL: Waterlevel = 4
 Function_Refill_Water -> PRG_Person: WaterRefilled = FALSE
 deactivate Function_Refill_Water
+Prepare_Machine -> Visualization: Indicator 'LED' stays on
 PRG_Person -> Visualization: Button 'WaterRefilled' deactivated
-activate PRG_Person #BLUE
-PRG_Person -> User: Button 'WaterRefilled' changes
-deactivate PRG_Person 
 
 @enduml
 ```

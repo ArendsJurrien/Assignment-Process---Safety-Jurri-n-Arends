@@ -12,12 +12,12 @@ END_VAR
       <ST><![CDATA[// Producing coffee by means of an senseo machine
 // Name: Jurriën Arends
 // Studentnumer: 515355
-// Date: 6-11-2024
-// Version: 0.8
+// Date: 8-11-2024
+// Version: 1.0
 
 // Function: Refill water of coffee machine when it's empty.
 IF WaterRefilled = TRUE THEN				// If water is refilled. Waterlevel of reservoir is full. Return variable to 'PrepareMachine'.
-  	GVL.WaterLevel := 2;	
+  	GVL.WaterLevel := 4;				
   	WaterRefilled:= FALSE;
 END_IF;]]></ST>
     </Implementation>

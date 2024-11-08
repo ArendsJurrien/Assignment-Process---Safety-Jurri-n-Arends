@@ -10,7 +10,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{D890A87E-2232-401E-A838-AD7209BF2F51}" Name="Coffee_Process" PrjFilePath="Coffee_Process\Coffee_Process.plcproj" TmcFilePath="Coffee_Process\Coffee_Process.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Coffee_Process\Coffee_Process.tmc" TmcHash="{973006F7-E34D-B075-4A60-8F39C4719F8C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Coffee_Process\Coffee_Process.tmc" TmcHash="{7B75C75F-5678-ACD4-B7C6-518330BC158F}">
 					<Name>Coffee_Process Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

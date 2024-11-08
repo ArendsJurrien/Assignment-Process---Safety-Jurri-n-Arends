@@ -19,7 +19,7 @@ deactivate Visualization
 Prepare_Machine -> Visualization: Indicator 'LED' turns on
 
 Prepare_Machine -> GVL: Check Waterlevel
-GVL -> Prepare_Machine: Waterlevel = 4
+GVL --> Prepare_Machine: Return waterlevel
 
 
 User -> Visualization: Push 'Pod' button
@@ -43,6 +43,7 @@ Visualization --> User: Button 'Cups Choosen' changes
 deactivate Visualization 
 
 Prepare_Machine -> GVL: Start brewing = TRUE
+Brew_Coffee -> GVL: Start brew_coffee
 activate Brew_Coffee #GREEN
 Brew_Coffee -> Brew_Coffee: Heating water
 Brew_Coffee -> Brew_Coffee: Brewing coffee
@@ -51,7 +52,7 @@ Brew_Coffee -> GVL: Coffee brewed = TRUE
 deactivate Brew_Coffee
 Prepare_Machine -> GVL: Waterlevel -1
 activate Prepare_Machine #ORANGE
-Prepare_Machine -> GVL:Coffee brewed = FALSE
+Prepare_Machine -> GVL: Coffee brewed = FALSE
 Prepare_Machine -> Visualization: Button 'Pod' deactivated
 Prepare_Machine -> Visualization: Button 'Cups choosen' deactivated
 deactivate Prepare_Machine
