@@ -20,11 +20,10 @@ VAR
 	
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Producing coffee by means of an senseo machine
-// Name: Jurriën Arends
+      <ST><![CDATA[// Name: Jurriën Arends
 // Studentnumer: 515355
-// Date: 6-11-2024
-// Version: 0.8
+// Date: 8-11-2024
+// Version: 0.9
 
 
 // Task 1: Preparing machine
@@ -32,14 +31,16 @@ CASE State OF
 // STATE OFF
  CoffeeMachine.OFF:									
 	IF GVL.Power = FALSE THEN						// IF no power, stay in this state
-	  OFF:= TRUE;
-	  Standby:= FALSE;
-	  LED:= FALSE;
+	  	OFF:= TRUE;
+	  	Standby:= FALSE;
+	  	LED:= FALSE;
     END_IF
 	
     IF GVL.Power = TRUE  THEN						// If power, go to state Standby
-	  State:= CoffeeMachine.Standby;
-	  OFF:= FALSE;
+	  	State:= CoffeeMachine.Standby;
+	  	OFF:= FALSE;
+	  	GVL.CoffeeBrewed := FALSE;				// Reset machine if power was off
+	  	GVL.StartBrewing := FALSE;				// Reset machine if power was off
     END_IF
 	
 	IF WaterRefilled = TRUE THEN					// Cannot refill water in this state
@@ -92,6 +93,10 @@ CASE State OF
 	IF WaterRefilled = TRUE THEN					// Cannot refill water in this state
 		WaterRefilled:= FALSE;
 	END_IF	 
+	
+	IF CupsChoosen = TRUE THEN					// Pod needs to be placed before choosing cups
+   		CupsChoosen:= FALSE;
+	END_IF
 	 	 
 // State PodPlaced	
  CoffeeMachine.PodPlaced:							
@@ -119,7 +124,7 @@ CASE State OF
 	 
 // State Task ready	
  CoffeeMachine.Ready:								
-    IF CupsChoosen = TRUE THEN						// If the machine is prepared, write a variable to task 'BrewCoffee' to start the process
+    IF CupsChoosen = TRUE AND Pod THEN						// If the machine is prepared, write a variable to task 'BrewCoffee' to start the process
       	Ready:= TRUE;
 	  	LED:= TRUE;
 	  	GVL.StartBrewing:= TRUE;
@@ -159,50 +164,16 @@ ELSE
   WaterFilled 	:= FALSE;
   PodPlaced		:= FALSE;
   Ready			:= FALSE;
-END_CASE; ]]></ST>
+END_CASE;]]></ST>
     </Implementation>
     <LineIds Name="PrepareMachine">
-      <LineId Id="22" Count="4" />
-      <LineId Id="32" Count="4" />
-      <LineId Id="146" Count="0" />
-      <LineId Id="38" Count="9" />
-      <LineId Id="183" Count="0" />
-      <LineId Id="309" Count="1" />
-      <LineId Id="308" Count="0" />
-      <LineId Id="48" Count="15" />
-      <LineId Id="226" Count="0" />
-      <LineId Id="230" Count="0" />
-      <LineId Id="275" Count="0" />
-      <LineId Id="64" Count="4" />
-      <LineId Id="225" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="253" Count="0" />
-      <LineId Id="72" Count="15" />
-      <LineId Id="304" Count="0" />
-      <LineId Id="306" Count="1" />
-      <LineId Id="305" Count="0" />
-      <LineId Id="89" Count="17" />
-      <LineId Id="328" Count="0" />
-      <LineId Id="107" Count="0" />
-      <LineId Id="300" Count="0" />
-      <LineId Id="302" Count="1" />
-      <LineId Id="301" Count="0" />
-      <LineId Id="108" Count="5" />
-      <LineId Id="281" Count="1" />
-      <LineId Id="114" Count="7" />
-      <LineId Id="128" Count="2" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="133" Count="0" />
-      <LineId Id="205" Count="0" />
-      <LineId Id="134" Count="0" />
-      <LineId Id="285" Count="3" />
-      <LineId Id="131" Count="0" />
-      <LineId Id="290" Count="0" />
-      <LineId Id="292" Count="1" />
-      <LineId Id="291" Count="0" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="294" Count="3" />
-      <LineId Id="122" Count="5" />
+      <LineId Id="641" Count="18" />
+      <LineId Id="796" Count="1" />
+      <LineId Id="660" Count="51" />
+      <LineId Id="798" Count="0" />
+      <LineId Id="800" Count="1" />
+      <LineId Id="799" Count="0" />
+      <LineId Id="712" Count="66" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

@@ -16,11 +16,10 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Producing coffee by means of an senseo machine
-// Name: Jurriën Arends
+      <ST><![CDATA[// Name: Jurriën Arends
 // Studentnumer: 515355
-// Date: 6-11-2024
-// Version: 0.8
+// Date: 8-11-2024
+// Version: 0.9
 
 // Task 2: Brewing coffee
 CASE State OF	
@@ -34,6 +33,7 @@ CASE State OF
     IF GVL.Power = TRUE  THEN					// IF power, go to state Idle
 	  	State:= Brewing.Idle;
 	  	OFF:= FALSE;
+
     END_IF
 	
   
@@ -98,42 +98,12 @@ ELSE
 	Idle			:= FALSE;
 	HeatingWater	:= FALSE;
   	BrewCoffee		:= FALSE;
-END_CASE; ]]></ST>
+END_CASE;]]></ST>
     </Implementation>
     <LineIds Name="BrewCoffee">
-      <LineId Id="23" Count="12" />
-      <LineId Id="37" Count="5" />
-      <LineId Id="110" Count="0" />
-      <LineId Id="43" Count="4" />
-      <LineId Id="49" Count="3" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="55" Count="0" />
-      <LineId Id="103" Count="0" />
-      <LineId Id="106" Count="1" />
-      <LineId Id="109" Count="0" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="56" Count="3" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="61" Count="0" />
-      <LineId Id="90" Count="0" />
-      <LineId Id="64" Count="3" />
-      <LineId Id="119" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="92" Count="2" />
-      <LineId Id="97" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="69" Count="4" />
-      <LineId Id="75" Count="7" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="98" Count="0" />
-      <LineId Id="100" Count="1" />
-      <LineId Id="99" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="138" Count="0" />
-      <LineId Id="85" Count="4" />
+      <LineId Id="167" Count="16" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="184" Count="63" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

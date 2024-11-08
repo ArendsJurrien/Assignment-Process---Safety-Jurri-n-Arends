@@ -17,7 +17,7 @@ END_VAR
 
 // Function: Refill water of coffee machine when it's empty.
 IF WaterRefilled = TRUE THEN				// If water is refilled. Waterlevel of reservoir is full. Return variable to 'PrepareMachine'.
-  	GVL.WaterLevel := 4;	
+  	GVL.WaterLevel := 2;	
   	WaterRefilled:= FALSE;
 END_IF;]]></ST>
     </Implementation>

@@ -1,5 +1,7 @@
-# Procesomschrijving
+# Proces description
 
-De eerste taak: Het vullen van het waterreservoir en het plaatsen van een/twee koffiepad(s)
-De tweede taak: Het starten van het koffiezetapparaat
-De derde taak: Het ontkalken van het koffiezetapparaat
+The following chapter describes the tasks and function
+- The first task: Preparing the machine. Taking care a pod is placed and amount of cups is choosen.
+- The second task: Heating up the water and brewing coffee.
+- Function: Called by the task 'Prepare Machine' to refill the waterreservoir.
+  

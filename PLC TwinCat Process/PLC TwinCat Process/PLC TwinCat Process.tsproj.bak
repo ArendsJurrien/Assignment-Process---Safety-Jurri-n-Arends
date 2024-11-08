@@ -3,22 +3,31 @@
 	<Project ProjectGUID="{9ABC1A6A-7122-4215-A404-3BE1B4178517}" TargetNetId="39.231.85.117.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
-				<Task Id="3" Priority="1" CycleTime="100000" AmsPort="350" AdtTasks="true">
+				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{D890A87E-2232-401E-A838-AD7209BF2F51}" Name="Coffee_Process" PrjFilePath="Coffee_Process\Coffee_Process.plcproj" TmcFilePath="Coffee_Process\Coffee_Process.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Coffee_Process\Coffee_Process.tmc" TmcHash="{2D1A4AE5-A813-42BF-B65D-BF707467FD58}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Coffee_Process\Coffee_Process.tmc" TmcHash="{155D4C6B-D8A0-27B1-EE49-D55B723DA79C}">
 					<Name>Coffee_Process Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
 							<Id NeedCalleeCall="true">0</Id>
 							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>1</Priority>
+							<CycleTime>10000000</CycleTime>
+							<DependOn>FixedConfig</DependOn>
 						</Context>
 					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="1" OTCID="#x08502001"/>
+					</TaskPouOids>
 				</Instance>
 			</Project>
 		</Plc>

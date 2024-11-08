@@ -1,0 +1,47 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8a410552-ab38-456f-9328-afaf2fcfbd47}</ProjectGuid>
+    <SubObjectsSortedByName>True</SubObjectsSortedByName>
+    <DownloadApplicationInfo>true</DownloadApplicationInfo>
+    <WriteProductVersion>true</WriteProductVersion>
+    <GenerateTpy>false</GenerateTpy>
+    <Name>Coffee_Process</Name>
+    <ProgramVersion>3.1.4024.0</ProgramVersion>
+    <Application>{83fcafd2-3730-490b-8878-f916c2eef53b}</Application>
+    <TypeSystem>{be62670f-6670-4e21-98a5-4b5242cb81a4}</TypeSystem>
+    <Implicit_Task_Info>{18c2d462-d023-4212-ba99-486788a7b47b}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{c9d1b07c-bc3b-483b-9506-0d9dd865ab21}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{0e838faa-0e71-405a-9c97-0d53d5402785}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{96f83fbd-812e-471d-8ac9-8177d6523eba}</LibraryReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="PlcTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DUTs" />
+    <Folder Include="GVLs" />
+    <Folder Include="VISUs" />
+    <Folder Include="POUs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+</Project>

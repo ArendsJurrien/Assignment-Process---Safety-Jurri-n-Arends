@@ -6,7 +6,7 @@ VAR_GLOBAL
 	Power				:		BOOL; 		// Turning On/Off the coffee machine
 	StartBrewing		:		BOOL; 		// Preparing of machine is finished
 	CoffeeBrewed		:		BOOL; 		// The coffee is brewed/finished
-	WaterLevel			:		INT:= 4;	// Waterlevel of a full reservoir 
+	WaterLevel			:		INT:= 2;	// Waterlevel of a full reservoir 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
