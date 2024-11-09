@@ -34,11 +34,12 @@ PRG_Person -> Visualization: Button 'WaterRefilled' pushed
 deactivate PRG_Person 
 Visualization -> User: Button 'WaterRefilled' changes
 deactivate Visualization
+Function_Refill_Water -> Function_Refill_Water: WaterRefilled = FALSE
 Function_Refill_Water -> GVL: Waterlevel = 4
-Function_Refill_Water -> PRG_Person: WaterRefilled = FALSE
+Function_Refill_Water -> Visualization: Button 'WaterRefilled' deactivated
 deactivate Function_Refill_Water
 Prepare_Machine -> Visualization: Indicator 'LED' stays on
-PRG_Person -> Visualization: Button 'WaterRefilled' deactivated
+
 
 @enduml
 ```
